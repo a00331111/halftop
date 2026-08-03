@@ -1,0 +1,159 @@
+/* Halftop - 简体中文 */
+
+"status.builtin_display" = "内置显示器";
+"status.builtin_display_disabled" = "内置显示器";
+"status.external_display" = "外接显示器";
+"status.airplay" = "AirPlay";
+"status.sidescreen" = "SideScreen";
+"status.power_source" = "电源";
+"status.energy_mode" = "能耗模式";
+
+"state.enabled" = "已开启";
+"state.disabled" = "已关闭";
+"state.connected" = "已连接";
+"state.not_connected" = "未连接";
+"state.power_adapter" = "电源适配器";
+"state.battery" = "电池";
+"state.open" = "打开";
+"state.closed" = "关闭";
+
+"energy.automatic" = "自动";
+"energy.low_power" = "低电量";
+"energy.high_power" = "高性能";
+"energy.unavailable" = "不可用";
+"energy.on_battery" = "使用电池";
+"energy.on_adapter" = "使用电源";
+
+"active_mode.normal" = "正常";
+"active_mode.clamshell_ready" = "合盖就绪";
+"active_mode.no_external_display" = "无外接显示器";
+
+"section.clamshell_ready" = "合盖就绪";
+"section.sleep_tools" = "睡眠工具";
+"section.energy_mode" = "能耗模式";
+"section.services_alerts" = "服务与提醒";
+"section.shortcuts" = "快捷键";
+
+"clamshell.launch_at_login" = "登录时启动";
+"clamshell.allow_on_battery" = "允许使用电池";
+"clamshell.launch_sidescreen_at_login" = "登录时启动 SideScreen";
+"clamshell.ignore_lid_close" = "忽略合盖（禁止休眠）";
+"clamshell.disable_builtin_display" = "禁用内置显示器";
+"clamshell.dim_builtin_display" = "调暗内置显示器";
+
+"clamshell_info.title" = "合盖就绪";
+"clamshell_info.description" = "让 Mac 在外接显示器工作流中保持唤醒状态。默认需要同时连接物理外接显示器和电源适配器。";
+"clamshell_info.launch_at_login" = "在你登录后自动启动 Halftop。";
+"clamshell_info.allow_on_battery" = "当连接了物理外接显示器时，即使没有电源适配器也保持 Mac 唤醒。";
+"clamshell_info.launch_sidescreen_at_login" = "登录后打开 SideScreen 应用。SideScreen 自身的启动偏好设置决定使用 USB 还是 WiFi 模式。";
+"clamshell_info.ignore_lid_close" = "使用不受支持的系统级休眠覆盖。可能需要管理员批准，请谨慎使用。";
+"clamshell_info.dim_builtin_display" = "仅将 MacBook 内置显示器亮度设为零。";
+"clamshell_info.disable_builtin_display" = "在连接物理外接显示器时禁用内置显示器。此功能为实验性，macOS 不予支持。";
+
+"sleep_tools.auto_resleep" = "自动重睡";
+"sleep_tools.bag_sleep_guard" = "包内唤醒保护";
+
+"sleep_tools_info.title" = "睡眠工具";
+"sleep_tools_info.description" = "后台守护进程，决定 Mac 何时应返回休眠状态。";
+"sleep_tools_info.auto_resleep" = "在无人值守唤醒后，当检测不到物理外接显示器或近期输入时，将 Mac 返回休眠。";
+"sleep_tools_info.bag_sleep_guard" = "如果 Mac 在锁定状态下使用电池唤醒，当没有键盘或触控板输入时将其返回休眠。";
+
+"services.login_wake_sound" = "登录、唤醒和解锁声音";
+"services.battery_voice_alert" = "低电量语音提醒";
+"services.lock_screen_sayer" = "锁屏语音提醒";
+
+"services_info.title" = "服务与提醒";
+"services_info.description" = "可选的登录服务和 MacBook 状态变化的语音提醒。";
+"services_info.login_wake_sound" = "在登录、唤醒或解锁 Mac 后播放一段短声音。";
+"services_info.battery_voice_alert" = "在 Mac 放电时，达到选定的低电量级别时播报电池警告。";
+"services_info.lock_screen_sayer" = "当 macOS 会话锁定时说\"锁屏\"。";
+
+"shortcuts.auto_airplay" = "自动 AirPlay";
+"shortcuts.sidescreen_usb" = "SideScreen USB";
+"shortcuts.sidescreen_wifi" = "SideScreen WiFi";
+"shortcuts.sleep_now" = "立即休眠";
+"shortcuts.edit" = "编辑";
+"shortcuts.reset_defaults" = "恢复默认";
+"shortcuts.press_keys" = "按键…";
+"shortcuts.press_new_combo" = "点击一个快捷键，然后按下新的组合键。按 Esc 取消。";
+"shortcuts.already_in_use" = "部分快捷键已被占用。点击\"编辑\"选择新的组合。";
+"shortcuts.at_least_one_modifier" = "请至少使用一个修饰键。";
+"shortcuts.set" = "设置";
+"shortcuts.going_to_sleep" = "正在休眠";
+"shortcuts.control" = "Control";
+"shortcuts.option" = "Option";
+"shortcuts.shift" = "Shift";
+"shortcuts.command" = "Command";
+
+"shortcuts_info.title" = "快捷键";
+"shortcuts_info.auto_airplay" = "发现可用的 AirPlay 显示器，朗读列表，让你通过数字键选择。";
+"shortcuts_info.sleep_now" = "播放休眠提示音，稍等片刻，然后让 macOS 休眠。";
+"shortcuts_info.sidescreen_usb" = "将 SideScreen 设为 USB 启动模式，必要时重启 SideScreen，然后通过 USB 自动启动开始串流。";
+"shortcuts_info.sidescreen_wifi" = "将 SideScreen 设为 WiFi 启动模式，必要时重启 SideScreen，然后通过 WiFi 自动启动开始串流。";
+"shortcuts_info.usb_wifi_available" = "USB/WiFi 快捷键可用。";
+"shortcuts_info.update_required" = "请更新 SideScreen 以使用 USB/WiFi 快捷键。";
+"shortcuts_info.install_required" = "请安装 SideScreen 以显示 USB/WiFi 快捷键。";
+
+"sidescreen.installed_version" = "SideScreen %@";
+"sidescreen.update_required" = "SideScreen %@ 已安装，需要更新";
+"sidescreen.installed" = "SideScreen 已安装";
+"sidescreen.not_installed" = "SideScreen 未安装";
+"sidescreen.installed_summary" = "已安装";
+"sidescreen.update_required_summary" = "需要更新";
+"sidescreen.not_installed_summary" = "未安装";
+"sidescreen.update" = "更新";
+"sidescreen.install" = "安装";
+
+"tool_action.start_auto_airplay" = "启动自动 AirPlay";
+"tool_action.start_sidescreen_usb" = "启动 SideScreen USB";
+"tool_action.start_sidescreen_wifi" = "启动 SideScreen WiFi";
+"tool_action.sidescreen_usb" = "SideScreen USB";
+"tool_action.sidescreen_wifi" = "SideScreen WiFi";
+"tool_action.halftop_action" = "Halftop 操作";
+"tool_action.start_airplay" = "启动 AirPlay";
+
+"tool_message.started" = "%@ 已启动";
+"tool_message.starting" = "%@ 正在启动";
+"tool_message.service_on" = "%@：已开启";
+"tool_message.service_off" = "%@：已关闭";
+"tool_message.fixing_gatekeeper" = "正在修复 SideScreen Gatekeeper…";
+"tool_message.gatekeeper_fixed" = "SideScreen Gatekeeper 已修复";
+
+"tool_error.missing_resources" = "应用包中缺少 Tools 文件夹。";
+"tool_error.command_failed" = "无法运行该命令。";
+"tool_error.sidescreen_unavailable" = "%@。请安装 SideScreen 0.11.0 或更高版本。";
+
+"display_error.control_unavailable" = "此 macOS 版本不支持内置显示器控制。";
+"display_error.builtin_not_found" = "找不到内置显示器。";
+"display_error.config_begin_failed" = "无法开始显示器配置。";
+"display_error.disable_failed" = "无法禁用内置显示器。";
+"display_error.enable_failed" = "无法启用内置显示器。";
+"display_error.brightness_unavailable" = "此 macOS 版本不支持亮度控制。";
+"display_error.dim_failed" = "无法调暗内置显示器。";
+
+"energy_error.unsupported" = "此 Mac 不支持该能耗模式。";
+"energy_error.command_failed" = "无法更改能耗模式：%@";
+
+"sleep_error.assertion_creation_failed" = "无法创建休眠阻止断言（IOKit：%d）。请检查系统安全设置。";
+"sleep_error.sleep_disabled" = "休眠前无法禁用休眠覆盖。";
+"sleep_error.service_unavailable" = "无法使系统休眠：电源管理服务不可用。";
+"sleep_error.sleep_failed" = "无法使系统休眠（IOKit：%d）。";
+"sleep_error.lid_command_failed" = "无法更新合盖行为：%@";
+"sleep_error.lid_helper_unavailable" = "无法更新合盖行为：特权守护进程未安装。请运行 script/install_lid_daemon.sh 一次。";
+
+"system_error.launch_agent_failed" = "无法更新登录时启动：%@";
+"system_error.must_run_from_app_bundle" = "Halftop 必须从应用包运行才能启用登录时启动。";
+
+"managed_service.auto_resleep" = "自动重睡";
+"managed_service.bag_sleep_guard" = "包内唤醒保护";
+"managed_service.launch_sidescreen_at_login" = "登录时启动 SideScreen";
+"managed_service.low_battery_voice_alert" = "低电量语音提醒";
+"managed_service.lock_screen_sayer" = "锁屏语音提醒";
+
+"footer.halftop_by" = "Halftop 由";
+"footer.quit" = "退出";
+
+"help.about_clamshell" = "关于合盖就绪";
+"help.about_sleep_tools" = "关于睡眠工具";
+"help.about_services" = "关于服务与提醒";
+"help.about_shortcuts" = "关于快捷键";

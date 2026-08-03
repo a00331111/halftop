@@ -26,6 +26,6 @@ import IOKit.pwr_mgt
 enum AssertionError: LocalizedError {
     case creationFailed(IOReturn)
     var errorDescription: String? {
-        switch self { case .creationFailed(let code): "Could not create sleep-prevention assertion (IOKit: \(code)). Check system security settings." }
+        switch self { case .creationFailed(let code): L10n.SleepError.assertionCreationFailed(code) }
     }
 }

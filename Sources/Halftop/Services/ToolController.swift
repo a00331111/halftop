@@ -9,17 +9,17 @@ enum ToolAction: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .airPlay: "Start Auto AirPlay"
-        case .sideScreenUSB: "Start SideScreen USB"
-        case .sideScreenWireless: "Start SideScreen WiFi"
+        case .airPlay: L10n.ToolAction.startAutoAirPlay
+        case .sideScreenUSB: L10n.ToolAction.startSideScreenUSB
+        case .sideScreenWireless: L10n.ToolAction.startSideScreenWiFi
         }
     }
 
     var spokenTitle: String {
         switch self {
         case .airPlay: title
-        case .sideScreenUSB: "SideScreen USB"
-        case .sideScreenWireless: "SideScreen WiFi"
+        case .sideScreenUSB: L10n.ToolAction.sideScreenUSB
+        case .sideScreenWireless: L10n.ToolAction.sideScreenWiFi
         }
     }
 
@@ -56,17 +56,17 @@ struct SideScreenInstallation: Equatable, Sendable {
 
     var statusText: String {
         if let version {
-            isSupported ? "SideScreen \(version)" : "SideScreen \(version) installed, update required"
+            isSupported ? L10n.SideScreen.installedVersion(version) : L10n.SideScreen.updateRequired(version)
         } else if isInstalled {
-            "SideScreen installed"
+            L10n.SideScreen.installed
         } else {
-            "SideScreen not installed"
+            L10n.SideScreen.notInstalled
         }
     }
 
     var summaryText: String {
-        if !isInstalled { return "Not Installed" }
-        return isSupported ? "Installed" : "Update Required"
+        if !isInstalled { return L10n.SideScreen.notInstalledSummary }
+        return isSupported ? L10n.SideScreen.installedSummary : L10n.SideScreen.updateRequiredSummary
     }
 
     var availabilityKey: String {
@@ -120,11 +120,11 @@ struct ManagedService: Identifiable, Sendable {
     private var gatekeeperFixInProgress = false
 
     let services = [
-        ManagedService(id: "com.eky.halftop.headless-auto-resleep", title: "Automatic Re-Sleep", folder: "headless-auto-resleep", installer: "install.sh", uninstaller: "uninstall.sh", installArgument: nil),
-        ManagedService(id: "com.eky.halftop.bag-sleep-guard", title: "Bag Sleep Guard", folder: "bag-sleep-guard", installer: "install.sh", uninstaller: "uninstall.sh", installArgument: nil),
-        ManagedService(id: "com.eky.halftop.sidescreen-login", title: "Launch SideScreen at Login", folder: "Auto-SideScreen-USB", installer: "install-login.sh", uninstaller: "uninstall-login.sh", installArgument: nil),
-        ManagedService(id: "com.eky.halftop.battery-voice-alert", title: "Low Battery Voice Alert", folder: "Battery Voice Alert", installer: "Halftop", uninstaller: nil, installArgument: "install"),
-        ManagedService(id: "com.eky.halftop.lock-screen-sayer", title: "Lock Screen Voice Alert", folder: "lock-screen-sayer", installer: "install.sh", uninstaller: "uninstall.sh", installArgument: nil)
+        ManagedService(id: "com.eky.halftop.headless-auto-resleep", title: L10n.ManagedService.autoResleep, folder: "headless-auto-resleep", installer: "install.sh", uninstaller: "uninstall.sh", installArgument: nil),
+        ManagedService(id: "com.eky.halftop.bag-sleep-guard", title: L10n.ManagedService.bagSleepGuard, folder: "bag-sleep-guard", installer: "install.sh", uninstaller: "uninstall.sh", installArgument: nil),
+        ManagedService(id: "com.eky.halftop.sidescreen-login", title: L10n.ManagedService.launchSideScreenAtLogin, folder: "Auto-SideScreen-USB", installer: "install-login.sh", uninstaller: "uninstall-login.sh", installArgument: nil),
+        ManagedService(id: "com.eky.halftop.battery-voice-alert", title: L10n.ManagedService.lowBatteryVoiceAlert, folder: "Battery Voice Alert", installer: "Halftop", uninstaller: nil, installArgument: "install"),
+        ManagedService(id: "com.eky.halftop.lock-screen-sayer", title: L10n.ManagedService.lockScreenSayer, folder: "lock-screen-sayer", installer: "install.sh", uninstaller: "uninstall.sh", installArgument: nil)
     ]
 
     init() { refreshServices() }
@@ -136,7 +136,7 @@ struct ManagedService: Identifiable, Sendable {
         }
         do {
             try Self.launch(script: action.script.file, in: action.script.folder)
-            lastMessage = "\(action.title) started"
+            lastMessage = L10n.ToolMessage.started(action.title)
         } catch {
             lastMessage = error.localizedDescription
         }
@@ -151,12 +151,12 @@ struct ManagedService: Identifiable, Sendable {
         }
 
         Self.playActionPrelude(action.spokenTitle)
-        lastMessage = "\(action.title) starting"
+        lastMessage = L10n.ToolMessage.starting(action.title)
         Task { @MainActor in
             try? await Task.sleep(for: .seconds(3))
             do {
                 try Self.launch(script: action.script.file, in: action.script.folder)
-                lastMessage = "\(action.title) started"
+                lastMessage = L10n.ToolMessage.started(action.title)
             } catch {
                 lastMessage = error.localizedDescription
             }
@@ -195,13 +195,13 @@ struct ManagedService: Identifiable, Sendable {
               let appURL = sideScreen.appURL else { return }
         gatekeeperFixInProgress = true
         if reportStatus {
-            lastMessage = "Fixing SideScreen Gatekeeper..."
+            lastMessage = L10n.ToolMessage.fixingGatekeeper
         }
         Task {
             do {
                 try await Self.removeQuarantine(from: appURL)
                 if reportStatus {
-                    lastMessage = "SideScreen Gatekeeper fixed"
+                    lastMessage = L10n.ToolMessage.gatekeeperFixed
                 }
             } catch {
                 lastMessage = error.localizedDescription
@@ -222,7 +222,7 @@ struct ManagedService: Identifiable, Sendable {
                 } else {
                     try await Self.execute(script: service.installer, in: service.folder, argument: "uninstall")
                 }
-                lastMessage = "\(service.title): \(enabled ? "on" : "off")"
+                lastMessage = enabled ? L10n.ToolMessage.serviceOn(service.title) : L10n.ToolMessage.serviceOff(service.title)
             } catch {
                 lastMessage = error.localizedDescription
             }
@@ -357,9 +357,9 @@ enum ToolError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .missingResources: "The Tools folder is missing from the application bundle."
-        case .commandFailed(let output): output.isEmpty ? "The command could not be run." : output
-        case .sideScreenUnavailable(let status): "\(status). Install SideScreen 0.11.0 or newer."
+        case .missingResources: L10n.ToolError.missingResources
+        case .commandFailed(let output): output.isEmpty ? L10n.ToolError.commandFailed : output
+        case .sideScreenUnavailable(let status): L10n.ToolError.sideScreenUnavailable(status)
         }
     }
 }

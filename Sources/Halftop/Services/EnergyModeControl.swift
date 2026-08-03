@@ -37,8 +37,8 @@ enum EnergyModeControlError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .unsupported: "This energy mode is not supported by this Mac."
-        case .commandFailed(let message): "Could not change Energy Mode: \(message)"
+        case .unsupported: L10n.EnergyError.unsupported
+        case .commandFailed(let message): L10n.EnergyError.commandFailed(message)
         }
     }
 }

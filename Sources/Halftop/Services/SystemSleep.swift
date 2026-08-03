@@ -9,11 +9,11 @@ enum SystemSleepError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .serviceUnavailable:
-            "Could not put the system to sleep: power-management service is unavailable."
+            L10n.SleepError.serviceUnavailable
         case .sleepDisabled:
-            "Could not put the system to sleep while Ignore Lid Close is still active. Turn it off, then try again."
+            L10n.SleepError.sleepDisabled
         case .sleepFailed(let code):
-            "Could not put the system to sleep (IOKit: \(code))."
+            L10n.SleepError.sleepFailed(code)
         }
     }
 }

@@ -37,6 +37,19 @@ cp -R "$ROOT_DIR/Tools" "$CONTENTS/Resources/Tools"
 cp "$ROOT_DIR/Assets/MenuBar/halftop-menu-iconTemplate.png" "$CONTENTS/Resources/"
 cp "$ROOT_DIR/Assets/MenuBar/halftop-menu-iconTemplate@2x.png" "$CONTENTS/Resources/"
 cp "$ROOT_DIR/Assets/Halftop.icns" "$CONTENTS/Resources/"
+
+# Copy localization resources from SPM bundle
+RESOURCE_BUNDLE="$BIN_DIR/Halftop_Halftop.bundle"
+if [ -d "$RESOURCE_BUNDLE" ]; then
+  cp -R "$RESOURCE_BUNDLE" "$CONTENTS/Halftop_Halftop.bundle"
+  # Fix zh-hans -> zh-Hans case issue from SPM (two-step rename for case-insensitive FS)
+  if [ -d "$CONTENTS/Halftop_Halftop.bundle/zh-hans.lproj" ] && [ ! -d "$CONTENTS/Halftop_Halftop.bundle/zh-Hans.lproj" ]; then
+    cd "$CONTENTS/Halftop_Halftop.bundle"
+    mv zh-hans.lproj zh-hans-temp.lproj
+    mv zh-hans-temp.lproj zh-Hans.lproj
+    cd "$ROOT_DIR"
+  fi
+fi
 chmod +x "$CONTENTS/MacOS/$EXECUTABLE_NAME" "$CONTENTS/Library/PrivilegedHelpers/Halftop Privileged Helper"
 find "$CONTENTS/Resources/Tools" -type f \( -name '*.sh' -o -name '*.command' \) -exec chmod +x {} +
 

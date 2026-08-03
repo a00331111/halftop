@@ -1,0 +1,183 @@
+/* Halftop - English Localizations */
+
+// System Status
+"status.builtin_display" = "Built-in Display";
+"status.builtin_display_disabled" = "Built-in Display";
+"status.external_display" = "External Display";
+"status.airplay" = "AirPlay";
+"status.sidescreen" = "SideScreen";
+"status.power_source" = "Power Source";
+"status.energy_mode" = "Energy Mode";
+
+// States
+"state.enabled" = "Enabled";
+"state.disabled" = "Disabled";
+"state.connected" = "Connected";
+"state.not_connected" = "Not Connected";
+"state.power_adapter" = "Power Adapter";
+"state.battery" = "Battery";
+"state.open" = "Open";
+"state.closed" = "Closed";
+
+// Energy Mode
+"energy.automatic" = "Automatic";
+"energy.low_power" = "Low Power";
+"energy.high_power" = "High Power";
+"energy.unavailable" = "Unavailable";
+"energy.on_battery" = "On Battery";
+"energy.on_adapter" = "On Power Adapter";
+
+// Active Mode
+"active_mode.normal" = "Normal";
+"active_mode.clamshell_ready" = "Clamshell Ready";
+"active_mode.no_external_display" = "No external display";
+
+// Section Headers
+"section.clamshell_ready" = "CLAMSHELL READY";
+"section.sleep_tools" = "SLEEP TOOLS";
+"section.energy_mode" = "ENERGY MODE";
+"section.services_alerts" = "SERVICES & ALERTS";
+"section.shortcuts" = "SHORTCUTS";
+
+// Clamshell Section
+"clamshell.launch_at_login" = "Launch at Login";
+"clamshell.allow_on_battery" = "Allow on Battery";
+"clamshell.launch_sidescreen_at_login" = "Launch SideScreen at Login";
+"clamshell.ignore_lid_close" = "Ignore Lid Close (Disable Sleep)";
+"clamshell.disable_builtin_display" = "Disable Built-in Display";
+"clamshell.dim_builtin_display" = "Dim Built-in Display";
+
+// Clamshell Info
+"clamshell_info.title" = "Clamshell Ready";
+"clamshell_info.description" = "Keeps the Mac awake for an external-display workflow. By default, a physical external display and power adapter must both be connected.";
+"clamshell_info.launch_at_login" = "Starts Halftop automatically after you sign in.";
+"clamshell_info.allow_on_battery" = "Also keeps the Mac awake without a power adapter when a physical external display is connected.";
+"clamshell_info.launch_sidescreen_at_login" = "Opens the official SideScreen app after login. SideScreen's own startup preferences decide USB or WiFi mode.";
+"clamshell_info.ignore_lid_close" = "Uses an unsupported system-wide sleep override. It may require administrator approval and should be used carefully.";
+"clamshell_info.dim_builtin_display" = "Sets only the MacBook's built-in display brightness to zero.";
+"clamshell_info.disable_builtin_display" = "Disables the built-in display while a physical external display is connected. Experimental and unsupported by macOS.";
+
+// Sleep Tools
+"sleep_tools.auto_resleep" = "Automatic Re-Sleep";
+"sleep_tools.bag_sleep_guard" = "Bag Sleep Guard";
+
+// Sleep Tools Info
+"sleep_tools_info.title" = "Sleep Tools";
+"sleep_tools_info.description" = "Background safeguards that decide when the Mac should return to sleep.";
+"sleep_tools_info.auto_resleep" = "After an unattended wake, returns the Mac to sleep when no physical external display or recent input is detected.";
+"sleep_tools_info.bag_sleep_guard" = "If the Mac wakes while locked and running on battery, returns it to sleep when there is no keyboard or trackpad input.";
+
+// Services & Alerts
+"services.login_wake_sound" = "Login, Wake & Unlock Sound";
+"services.battery_voice_alert" = "Low Battery Voice Alert";
+"services.lock_screen_sayer" = "Lock Screen Voice Alert";
+
+// Services Info
+"services_info.title" = "Services & Alerts";
+"services_info.description" = "Optional login services and spoken alerts for useful MacBook state changes.";
+"services_info.login_wake_sound" = "Plays a short sound after login, wake, or unlocking the Mac.";
+"services_info.battery_voice_alert" = "Speaks battery warnings at selected low-charge levels while the Mac is discharging.";
+"services_info.lock_screen_sayer" = "Says \U201cLock Screen\U201d when the macOS session becomes locked.";
+
+// Shortcuts
+"shortcuts.auto_airplay" = "Auto AirPlay";
+"shortcuts.sidescreen_usb" = "SideScreen USB";
+"shortcuts.sidescreen_wifi" = "SideScreen WiFi";
+"shortcuts.sleep_now" = "Sleep Now";
+"shortcuts.edit" = "Edit";
+"shortcuts.reset_defaults" = "Reset Defaults";
+"shortcuts.press_keys" = "Press keys\U2026";
+"shortcuts.press_new_combo" = "Click a shortcut, then press the new key combination. Press Esc to cancel.";
+"shortcuts.already_in_use" = "Some shortcuts are already in use. Click Edit to choose new combinations.";
+"shortcuts.at_least_one_modifier" = "Use at least one modifier key.";
+"shortcuts.set" = "Set";
+"shortcuts.going_to_sleep" = "Going to sleep";
+"shortcuts.control" = "Control";
+"shortcuts.option" = "Option";
+"shortcuts.shift" = "Shift";
+"shortcuts.command" = "Command";
+
+// Managed Service Titles
+"managed_service.auto_resleep" = "Automatic Re-Sleep";
+"managed_service.bag_sleep_guard" = "Bag Sleep Guard";
+"managed_service.launch_sidescreen_at_login" = "Launch SideScreen at Login";
+"managed_service.low_battery_voice_alert" = "Low Battery Voice Alert";
+"managed_service.lock_screen_sayer" = "Lock Screen Voice Alert";
+
+// Shortcuts Info
+"shortcuts_info.title" = "Shortcuts";
+"shortcuts_info.auto_airplay" = "Discovers available AirPlay displays, reads the list aloud, and lets you pick one by number.";
+"shortcuts_info.sleep_now" = "Plays the sleep cue, waits briefly, then asks macOS to sleep.";
+"shortcuts_info.sidescreen_usb" = "Sets official SideScreen to USB startup mode, restarts SideScreen if needed, and starts streaming through USB auto-start.";
+"shortcuts_info.sidescreen_wifi" = "Sets official SideScreen to WiFi startup mode, restarts SideScreen if needed, and starts streaming through WiFi auto-start.";
+"shortcuts_info.usb_wifi_available" = "USB/WiFi shortcuts are available.";
+"shortcuts_info.update_required" = "Update SideScreen to use USB/WiFi shortcuts.";
+"shortcuts_info.install_required" = "Install SideScreen to show USB/WiFi shortcuts.";
+
+// SideScreen
+"sidescreen.installed_version" = "SideScreen %@";
+"sidescreen.update_required" = "SideScreen %@ installed, update required";
+"sidescreen.installed" = "SideScreen installed";
+"sidescreen.not_installed" = "SideScreen not installed";
+"sidescreen.installed_summary" = "Installed";
+"sidescreen.update_required_summary" = "Update Required";
+"sidescreen.not_installed_summary" = "Not Installed";
+"sidescreen.update" = "Update";
+"sidescreen.install" = "Install";
+
+// Tool Actions
+"tool_action.start_auto_airplay" = "Start Auto AirPlay";
+"tool_action.start_sidescreen_usb" = "Start SideScreen USB";
+"tool_action.start_sidescreen_wifi" = "Start SideScreen WiFi";
+"tool_action.sidescreen_usb" = "SideScreen USB";
+"tool_action.sidescreen_wifi" = "SideScreen WiFi";
+"tool_action.halftop_action" = "Halftop Action";
+"tool_action.start_airplay" = "Start AirPlay";
+
+// Tool Messages
+"tool_message.started" = "%@ started";
+"tool_message.starting" = "%@ starting";
+"tool_message.service_on" = "%@: on";
+"tool_message.service_off" = "%@: off";
+"tool_message.fixing_gatekeeper" = "Fixing SideScreen Gatekeeper...";
+"tool_message.gatekeeper_fixed" = "SideScreen Gatekeeper fixed";
+
+// Tool Errors
+"tool_error.missing_resources" = "The Tools folder is missing from the application bundle.";
+"tool_error.command_failed" = "The command could not be run.";
+"tool_error.sidescreen_unavailable" = "%@. Install SideScreen 0.11.0 or newer.";
+
+// Display Errors
+"display_error.control_unavailable" = "Built-in display control is unavailable on this macOS version.";
+"display_error.builtin_not_found" = "Could not find the built-in display.";
+"display_error.config_begin_failed" = "Could not begin display configuration.";
+"display_error.disable_failed" = "Could not disable the built-in display.";
+"display_error.enable_failed" = "Could not enable the built-in display.";
+"display_error.brightness_unavailable" = "Brightness control is unavailable on this macOS version.";
+"display_error.dim_failed" = "Could not dim the built-in display.";
+
+// Energy Mode Errors
+"energy_error.unsupported" = "This energy mode is not supported by this Mac.";
+"energy_error.command_failed" = "Could not change Energy Mode: %@";
+
+// Sleep Errors
+"sleep_error.assertion_creation_failed" = "Could not create sleep-prevention assertion (IOKit: %d). Check system security settings.";
+"sleep_error.sleep_disabled" = "Could not disable sleep override before sleeping.";
+"sleep_error.service_unavailable" = "Could not put the system to sleep: power-management service is unavailable.";
+"sleep_error.sleep_failed" = "Could not put the system to sleep (IOKit: %d).";
+"sleep_error.lid_command_failed" = "Could not update lid behavior: %@";
+"sleep_error.lid_helper_unavailable" = "Could not update lid behavior: privileged helper is not installed. Run script/install_lid_daemon.sh once.";
+
+// System Errors
+"system_error.launch_agent_failed" = "Could not update Launch at Login: %@";
+"system_error.must_run_from_app_bundle" = "Halftop must be run from the app bundle to enable Launch at Login.";
+
+// Footer
+"footer.halftop_by" = "Halftop by";
+"footer.quit" = "Quit";
+
+// Help Buttons
+"help.about_clamshell" = "About Clamshell Ready";
+"help.about_sleep_tools" = "About Sleep Tools";
+"help.about_services" = "About Services & Alerts";
+"help.about_shortcuts" = "About Shortcuts";

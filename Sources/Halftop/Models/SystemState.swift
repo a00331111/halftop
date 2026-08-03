@@ -1,6 +1,6 @@
 enum LidState: Equatable, Sendable {
     case open, closed, unavailable
-    var text: String { switch self { case .open: "Open"; case .closed: "Closed"; case .unavailable: "Not Connected" } }
+    var text: String { switch self { case .open: L10n.State.open; case .closed: L10n.State.closed; case .unavailable: L10n.State.notConnected } }
 }
 
 enum EnergyMode: Hashable, Sendable, CaseIterable {
@@ -10,10 +10,10 @@ enum EnergyMode: Hashable, Sendable, CaseIterable {
 
     var text: String {
         switch self {
-        case .automatic: "Automatic"
-        case .lowPower: "Low Power"
-        case .highPower: "High Power"
-        case .unavailable: "Unavailable"
+        case .automatic: L10n.Energy.automatic
+        case .lowPower: L10n.Energy.lowPower
+        case .highPower: L10n.Energy.highPower
+        case .unavailable: L10n.Energy.unavailable
         }
     }
 }
@@ -21,7 +21,7 @@ enum EnergyMode: Hashable, Sendable, CaseIterable {
 enum EnergyPowerSource: Sendable {
     case battery, adapter
 
-    var title: String { self == .battery ? "On Battery" : "On Power Adapter" }
+    var title: String { self == .battery ? L10n.Energy.onBattery : L10n.Energy.onAdapter }
     var helperKey: String { self == .battery ? "b" : "c" }
 }
 
@@ -39,5 +39,5 @@ enum ActiveMode: Equatable, Sendable {
         assert(resolve(hasExternalDisplay: true, isOnACPower: true, allowOnBattery: false, activeModeEnabled: true) == .clamshellReady)
         assert(resolve(hasExternalDisplay: true, isOnACPower: true, allowOnBattery: false, activeModeEnabled: false) == .normal)
     }
-    var text: String { switch self { case .normal: "Normal"; case .clamshellReady: "Clamshell Ready"; case .noExternalDisplay: "No external display" } }
+    var text: String { switch self { case .normal: L10n.ActiveMode.normal; case .clamshellReady: L10n.ActiveMode.clamshellReady; case .noExternalDisplay: L10n.ActiveMode.noExternalDisplay } }
 }

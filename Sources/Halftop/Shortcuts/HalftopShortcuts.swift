@@ -19,9 +19,9 @@ enum ShortcutAction: String, AppEnum {
 
     static let typeDisplayRepresentation = TypeDisplayRepresentation(name: "Halftop Action")
     static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-        .airPlay: "Start Auto AirPlay",
-        .sideScreenUSB: "Start SideScreen USB",
-        .sideScreenWireless: "Start SideScreen WiFi"
+        .airPlay: DisplayRepresentation(stringLiteral: L10n.ToolAction.startAutoAirPlay),
+        .sideScreenUSB: DisplayRepresentation(stringLiteral: L10n.ToolAction.startSideScreenUSB),
+        .sideScreenWireless: DisplayRepresentation(stringLiteral: L10n.ToolAction.startSideScreenWiFi)
     ]
 
     var toolAction: ToolAction {

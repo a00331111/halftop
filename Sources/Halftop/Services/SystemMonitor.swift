@@ -101,7 +101,7 @@ import ServiceManagement
                 errorMessage = nil
             } catch {
                 launchAtLogin = Self.detectLaunchAtLogin()
-                errorMessage = "Could not update Launch at Login: \(error.localizedDescription)"
+                errorMessage = L10n.SystemError.launchAgentFailed(error.localizedDescription)
             }
         }
     }
@@ -290,7 +290,7 @@ import ServiceManagement
 
     private static func setLaunchAgentLoginItem(_ enabled: Bool) throws {
         guard !enabled || Bundle.main.bundleURL.pathExtension == "app" else {
-            throw NSError(domain: "Halftop", code: 1, userInfo: [NSLocalizedDescriptionKey: "Halftop must be run from the app bundle to enable Launch at Login."])
+            throw NSError(domain: "Halftop", code: 1, userInfo: [NSLocalizedDescriptionKey: L10n.SystemError.mustRunFromAppBundle])
         }
         if enabled {
             try FileManager.default.createDirectory(at: launchAgentURL.deletingLastPathComponent(), withIntermediateDirectories: true)

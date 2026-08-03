@@ -10,10 +10,10 @@ enum ShortcutCommand: Int, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .airPlay: "Auto AirPlay"
-        case .sideScreenUSB: "SideScreen USB"
-        case .sideScreenWireless: "SideScreen WiFi"
-        case .sleepNow: "Sleep Now"
+        case .airPlay: L10n.Shortcuts.autoAirPlay
+        case .sideScreenUSB: L10n.Shortcuts.sideScreenUSB
+        case .sideScreenWireless: L10n.Shortcuts.sideScreenWiFi
+        case .sleepNow: L10n.Shortcuts.sleepNow
         }
     }
 
@@ -71,10 +71,10 @@ struct ShortcutBinding: Codable, Equatable, Sendable {
 
     var readableDisplay: String {
         var parts: [String] = []
-        if modifiers & UInt32(controlKey) != 0 { parts.append("Control") }
-        if modifiers & UInt32(optionKey) != 0 { parts.append("Option") }
-        if modifiers & UInt32(shiftKey) != 0 { parts.append("Shift") }
-        if modifiers & UInt32(cmdKey) != 0 { parts.append("Command") }
+        if modifiers & UInt32(controlKey) != 0 { parts.append(L10n.Shortcuts.control) }
+        if modifiers & UInt32(optionKey) != 0 { parts.append(L10n.Shortcuts.option) }
+        if modifiers & UInt32(shiftKey) != 0 { parts.append(L10n.Shortcuts.shift) }
+        if modifiers & UInt32(cmdKey) != 0 { parts.append(L10n.Shortcuts.command) }
         parts.append(key)
         return parts.joined(separator: " + ")
     }

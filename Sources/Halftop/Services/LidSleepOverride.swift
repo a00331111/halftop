@@ -7,9 +7,9 @@ enum LidSleepOverrideError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .commandFailed(let output):
-            "Could not update lid behavior: \(output)"
+            L10n.SleepError.lidCommandFailed(output)
         case .helperUnavailable:
-            "Could not update lid behavior: privileged helper is not installed. Run script/install_lid_daemon.sh once."
+            L10n.SleepError.lidHelperUnavailable
         }
     }
 }

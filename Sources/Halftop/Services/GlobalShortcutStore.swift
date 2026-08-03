@@ -36,7 +36,7 @@ import Foundation
 
             let speech = Process()
             speech.executableURL = URL(fileURLWithPath: "/usr/bin/say")
-            speech.arguments = ["Going to sleep"]
+            speech.arguments = [L10n.Shortcuts.goingToSleep]
             try? speech.run()
             Task { @MainActor in
                 try? await Task.sleep(for: .seconds(3))
@@ -80,7 +80,7 @@ import Foundation
     private func capture(_ event: NSEvent, for command: ShortcutCommand) {
         let flags = event.modifierFlags.intersection([.control, .option, .shift, .command])
         guard !flags.isEmpty else {
-            registrationErrors[command] = "Use at least one modifier key."
+            registrationErrors[command] = L10n.Shortcuts.atLeastOneModifier
             return
         }
 

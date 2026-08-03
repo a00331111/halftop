@@ -17,7 +17,7 @@ struct MenuContentView: View {
             Divider()
             clamshellSection
             Divider()
-            infoSection("SLEEP TOOLS", isPresented: $showingSleepToolsInfo, help: "About Sleep Tools") {
+            infoSection(L10n.Section.sleepTools, isPresented: $showingSleepToolsInfo, help: L10n.Help.aboutSleepTools) {
                 ForEach(tools.services.filter { $0.id.contains("sleep") }, id: \.id) { serviceToggle($0) }
             } info: {
                 sleepToolsInfo
@@ -25,8 +25,8 @@ struct MenuContentView: View {
             Divider()
             energyModeSection
             Divider()
-            infoSection("SERVICES & ALERTS", isPresented: $showingNotificationsInfo, help: "About Services & Alerts") {
-                switchRow("Login, Wake & Unlock Sound", monitor.loginWakeSoundEnabled, monitor.setLoginWakeSoundEnabled)
+            infoSection(L10n.Section.servicesAlerts, isPresented: $showingNotificationsInfo, help: L10n.Help.aboutServices) {
+                switchRow(L10n.Services.loginWakeSound, monitor.loginWakeSoundEnabled, monitor.setLoginWakeSoundEnabled)
                 ForEach(tools.services.filter { !$0.id.contains("sleep") && !$0.id.contains("sidescreen-login") }, id: \.id) { serviceToggle($0) }
             } info: {
                 notificationsInfo
@@ -44,14 +44,14 @@ struct MenuContentView: View {
             }
             HStack {
                 HStack(spacing: 3) {
-                    Text("Halftop by")
+                    Text(L10n.Footer.halftopBy)
                     Link("enesky", destination: URL(string: "https://github.com/enesky/halftop")!)
                         .underline()
                 }
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 Spacer()
-                Button("Quit") { monitor.stop(); NSApplication.shared.terminate(nil) }
+                Button(L10n.Footer.quit) { monitor.stop(); NSApplication.shared.terminate(nil) }
                     .keyboardShortcut("q")
             }
         }
@@ -61,21 +61,21 @@ struct MenuContentView: View {
 
     private var systemStatus: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8) {
-            status("Built-in Display", monitor.disableBuiltInDisplay ? "Disabled" : "Enabled")
-            status("External Display", monitor.hasExternalDisplay ? "Connected" : "Not Connected")
-            status("AirPlay", monitor.hasAirPlayDisplay ? "Connected" : "Not Connected")
+            status(monitor.disableBuiltInDisplay ? L10n.Status.builtinDisplayDisabled : L10n.Status.builtinDisplay, monitor.disableBuiltInDisplay ? L10n.State.disabled : L10n.State.enabled)
+            status(L10n.Status.externalDisplay, monitor.hasExternalDisplay ? L10n.State.connected : L10n.State.notConnected)
+            status(L10n.Status.airPlay, monitor.hasAirPlayDisplay ? L10n.State.connected : L10n.State.notConnected)
             sideScreenStatus
-            status("Power Source", monitor.isOnACPower ? "Power Adapter" : "Battery")
-            status("Energy Mode", monitor.energyMode.text)
+            status(L10n.Status.powerSource, monitor.isOnACPower ? L10n.State.powerAdapter : L10n.State.battery)
+            status(L10n.Status.energyMode, monitor.energyMode.text)
         }
     }
 
     @ViewBuilder private var sideScreenStatus: some View {
         if tools.sideScreen.isSupported {
-            status("SideScreen", tools.sideScreen.summaryText, icon: "checkmark.circle", iconColor: .green)
+            status(L10n.Status.sideScreen, tools.sideScreen.summaryText, icon: "checkmark.circle", iconColor: .green)
         } else {
             Link(destination: SideScreenInstallation.releaseURL) {
-                status("SideScreen", tools.sideScreen.summaryText, icon: "exclamationmark.triangle", iconColor: .orange)
+                status(L10n.Status.sideScreen, tools.sideScreen.summaryText, icon: "exclamationmark.triangle", iconColor: .orange)
             }
             .buttonStyle(.plain)
         }
@@ -84,7 +84,7 @@ struct MenuContentView: View {
     private var shortcutsSection: some View {
         VStack(alignment: .leading, spacing: 9) {
             HStack {
-                Text("SHORTCUTS")
+                Text(L10n.Section.shortcuts)
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Button {
@@ -96,12 +96,12 @@ struct MenuContentView: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .help("About Shortcuts")
+                .help(L10n.Help.aboutShortcuts)
                 .popover(isPresented: $showingShortcutsInfo, arrowEdge: .trailing) {
                     shortcutsInfo
                 }
                 Spacer()
-                Button("Edit") { showingShortcutEditor.toggle() }
+                Button(L10n.Shortcuts.edit) { showingShortcutEditor.toggle() }
                     .buttonStyle(.plain)
                     .font(.caption)
                     .popover(isPresented: $showingShortcutEditor, arrowEdge: .trailing) {
@@ -112,7 +112,7 @@ struct MenuContentView: View {
                 ForEach(visibleShortcutCommands) { shortcutButton($0) }
             }
             if !shortcuts.registrationErrors.isEmpty {
-                Label("Some shortcuts are already in use. Click Edit to choose new combinations.", systemImage: "exclamationmark.triangle")
+                Label(L10n.Shortcuts.alreadyInUse, systemImage: "exclamationmark.triangle")
                     .font(.caption2)
                     .foregroundStyle(.red)
                     .fixedSize(horizontal: false, vertical: true)
@@ -125,7 +125,7 @@ struct MenuContentView: View {
     }
 
     private var energyModeSection: some View {
-        section("ENERGY MODE") {
+        section(L10n.Section.energyMode) {
             if monitor.batteryEnergyMode != .unavailable {
                 energyModePicker(.battery)
             }
@@ -177,23 +177,23 @@ struct MenuContentView: View {
             }
         }
         .buttonStyle(.plain)
-        .help(shortcuts.registrationErrors[command] ?? "Run \(command.title)")
+        .help(shortcuts.registrationErrors[command] ?? command.title)
     }
 
     private var shortcutsInfo: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Shortcuts").font(.headline)
-            infoRow("Auto AirPlay", "Discovers available AirPlay displays, reads the list aloud, and lets you pick one by number.")
-            infoRow("Sleep Now", "Plays the sleep cue, waits briefly, then asks macOS to sleep.")
+            Text(L10n.ShortcutsInfo.title).font(.headline)
+            infoRow(L10n.Shortcuts.autoAirPlay, L10n.ShortcutsInfo.autoAirPlayDesc)
+            infoRow(L10n.Shortcuts.sleepNow, L10n.ShortcutsInfo.sleepNowDesc)
             if tools.sideScreen.isSupported {
-                infoRow("SideScreen USB", "Sets official SideScreen to USB startup mode, restarts SideScreen if needed, and starts streaming through USB auto-start.")
-                infoRow("SideScreen WiFi", "Sets official SideScreen to WiFi startup mode, restarts SideScreen if needed, and starts streaming through WiFi auto-start.")
+                infoRow(L10n.Shortcuts.sideScreenUSB, L10n.ShortcutsInfo.sideScreenUSBDesc)
+                infoRow(L10n.Shortcuts.sideScreenWiFi, L10n.ShortcutsInfo.sideScreenWiFiDesc)
             }
             Divider()
             sideScreenInfo(
-                installedMessage: "USB/WiFi shortcuts are available.",
-                updateMessage: "Update SideScreen to use USB/WiFi shortcuts.",
-                missingMessage: "Install SideScreen to show USB/WiFi shortcuts."
+                installedMessage: L10n.ShortcutsInfo.usbWiFiAvailable,
+                updateMessage: L10n.ShortcutsInfo.updateRequired,
+                missingMessage: L10n.ShortcutsInfo.installRequired
             )
         }
         .padding(14)
@@ -215,7 +215,7 @@ struct MenuContentView: View {
                 }
                 Spacer()
                 if !isReady {
-                    Link(tools.sideScreen.isInstalled ? "Update" : "Install", destination: SideScreenInstallation.releaseURL)
+                    Link(tools.sideScreen.isInstalled ? L10n.SideScreen.update : L10n.SideScreen.install, destination: SideScreenInstallation.releaseURL)
                         .font(.caption)
                 }
             }
@@ -225,8 +225,8 @@ struct MenuContentView: View {
 
     private var shortcutEditor: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Keyboard Shortcuts").font(.headline)
-            Text("Click a shortcut, then press the new key combination. Press Esc to cancel.")
+            Text(L10n.Section.shortcuts).font(.headline)
+            Text(L10n.Shortcuts.pressNewCombo)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -239,7 +239,7 @@ struct MenuContentView: View {
                             .lineLimit(1)
                         Spacer()
                         Button { shortcuts.beginRecording(command) } label: {
-                            Text(shortcuts.recording == command ? "Press keys…" : shortcuts.bindings[command]?.readableDisplay ?? "Set")
+                            Text(shortcuts.recording == command ? L10n.Shortcuts.pressKeys : shortcuts.bindings[command]?.readableDisplay ?? L10n.Shortcuts.set)
                                 .font(.caption2)
                                 .foregroundStyle(shortcuts.recording == command ? Color.accentColor : .secondary)
                                 .multilineTextAlignment(.center)
@@ -266,9 +266,9 @@ struct MenuContentView: View {
                 }
             }
             HStack {
-                Button("Reset Defaults") { shortcuts.resetDefaults() }
+                Button(L10n.Shortcuts.resetDefaults) { shortcuts.resetDefaults() }
                 Spacer()
-                Button("Done") { showingShortcutEditor = false }
+                Button(L10n.Footer.quit) { showingShortcutEditor = false }
                     .keyboardShortcut(.defaultAction)
             }
         }
@@ -279,7 +279,7 @@ struct MenuContentView: View {
     private var clamshellSection: some View {
         VStack(alignment: .leading, spacing: 9) {
             HStack(spacing: 5) {
-                Text("CLAMSHELL READY")
+                Text(L10n.Section.clamshellReady)
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Button {
@@ -291,22 +291,22 @@ struct MenuContentView: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .help("About Clamshell Ready")
+                .help(L10n.Help.aboutClamshell)
                 .popover(isPresented: $showingClamshellInfo, arrowEdge: .trailing) {
                     clamshellInfo
                 }
                 Spacer()
             }
-            switchRow("Launch at Login", monitor.launchAtLogin, monitor.setLaunchAtLogin)
-            switchRow("Allow on Battery", monitor.allowOnBattery, monitor.setAllowOnBattery)
+            switchRow(L10n.Clamshell.launchAtLogin, monitor.launchAtLogin, monitor.setLaunchAtLogin)
+            switchRow(L10n.Clamshell.allowOnBattery, monitor.allowOnBattery, monitor.setAllowOnBattery)
             if tools.sideScreen.isSupported {
                 ForEach(tools.services.filter { $0.id.contains("sidescreen-login") }, id: \.id) { serviceToggle($0) }
             }
-            switchRow("Ignore Lid Close (Disable Sleep)", monitor.lidOverrideDesired, monitor.setLidOverrideEnabled)
+            switchRow(L10n.Clamshell.ignoreLidClose, monitor.lidOverrideDesired, monitor.setLidOverrideEnabled)
             if monitor.hasBuiltInDisplay {
-                switchRow("Disable Built-in Display", monitor.disableBuiltInDisplay, monitor.setDisableBuiltInDisplay)
+                switchRow(L10n.Clamshell.disableBuiltinDisplay, monitor.disableBuiltInDisplay, monitor.setDisableBuiltInDisplay)
                 if !monitor.disableBuiltInDisplay {
-                    switchRow("Dim Built-in Display", monitor.dimBuiltInAtLogin, monitor.setDimBuiltInAtLogin)
+                    switchRow(L10n.Clamshell.dimBuiltinDisplay, monitor.dimBuiltInAtLogin, monitor.setDimBuiltInAtLogin)
                 }
             }
         }
@@ -314,22 +314,22 @@ struct MenuContentView: View {
 
     private var clamshellInfo: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Clamshell Ready").font(.headline)
-            Text("Keeps the Mac awake for an external-display workflow. By default, a physical external display and power adapter must both be connected.")
+            Text(L10n.ClamshellInfo.title).font(.headline)
+            Text(L10n.ClamshellInfo.description)
                 .foregroundStyle(.secondary)
-            infoRow("Launch at Login", "Starts Halftop automatically after you sign in.")
-            infoRow("Allow on Battery", "Also keeps the Mac awake without a power adapter when a physical external display is connected.")
+            infoRow(L10n.Clamshell.launchAtLogin, L10n.ClamshellInfo.launchAtLoginDesc)
+            infoRow(L10n.Clamshell.allowOnBattery, L10n.ClamshellInfo.allowOnBatteryDesc)
             if tools.sideScreen.isSupported {
-                infoRow("Launch SideScreen at Login", "Opens the official SideScreen app after login. SideScreen's own startup preferences decide USB or WiFi mode.")
+                infoRow(L10n.Clamshell.launchSideScreenAtLogin, L10n.ClamshellInfo.launchSideScreenAtLoginDesc)
             }
-            infoRow("Ignore Lid Close", "Uses an unsupported system-wide sleep override. It may require administrator approval and should be used carefully.")
-            infoRow("Dim Built-in Display", "Sets only the MacBook's built-in display brightness to zero.")
-            infoRow("Disable Built-in Display", "Disables the built-in display while a physical external display is connected. Experimental and unsupported by macOS.")
+            infoRow(L10n.Clamshell.ignoreLidClose, L10n.ClamshellInfo.ignoreLidCloseDesc)
+            infoRow(L10n.Clamshell.dimBuiltinDisplay, L10n.ClamshellInfo.dimBuiltinDisplayDesc)
+            infoRow(L10n.Clamshell.disableBuiltinDisplay, L10n.ClamshellInfo.disableBuiltinDisplayDesc)
             Divider()
             sideScreenInfo(
-                installedMessage: "Launch SideScreen at Login is available.",
-                updateMessage: "Update SideScreen to show Launch SideScreen at Login.",
-                missingMessage: "Install SideScreen to show Launch SideScreen at Login."
+                installedMessage: L10n.ShortcutsInfo.usbWiFiAvailable,
+                updateMessage: L10n.ShortcutsInfo.updateRequired,
+                missingMessage: L10n.ShortcutsInfo.installRequired
             )
         }
         .padding(14)
@@ -338,11 +338,11 @@ struct MenuContentView: View {
 
     private var sleepToolsInfo: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Sleep Tools").font(.headline)
-            Text("Background safeguards that decide when the Mac should return to sleep.")
+            Text(L10n.SleepToolsInfo.title).font(.headline)
+            Text(L10n.SleepToolsInfo.description)
                 .foregroundStyle(.secondary)
-            infoRow("Automatic Re-Sleep", "After an unattended wake, returns the Mac to sleep when no physical external display or recent input is detected.")
-            infoRow("Bag Sleep Guard", "If the Mac wakes while locked and running on battery, returns it to sleep when there is no keyboard or trackpad input.")
+            infoRow(L10n.SleepTools.autoResleep, L10n.SleepToolsInfo.autoResleepDesc)
+            infoRow(L10n.SleepTools.bagSleepGuard, L10n.SleepToolsInfo.bagSleepGuardDesc)
         }
         .padding(14)
         .frame(width: 330)
@@ -350,12 +350,12 @@ struct MenuContentView: View {
 
     private var notificationsInfo: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Services & Alerts").font(.headline)
-            Text("Optional login services and spoken alerts for useful MacBook state changes.")
+            Text(L10n.ServicesInfo.title).font(.headline)
+            Text(L10n.ServicesInfo.description)
                 .foregroundStyle(.secondary)
-            infoRow("Login, Wake & Unlock Sound", "Plays a short sound after login, wake, or unlocking the Mac.")
-            infoRow("Low Battery Voice Alert", "Speaks battery warnings at selected low-charge levels while the Mac is discharging.")
-            infoRow("Lock Screen Voice Alert", "Says “Lock Screen” when the macOS session becomes locked.")
+            infoRow(L10n.Services.loginWakeSound, L10n.ServicesInfo.loginWakeSoundDesc)
+            infoRow(L10n.Services.batteryVoiceAlert, L10n.ServicesInfo.batteryVoiceAlertDesc)
+            infoRow(L10n.Services.lockScreenSayer, L10n.ServicesInfo.lockScreenSayerDesc)
         }
         .padding(14)
         .frame(width: 330)

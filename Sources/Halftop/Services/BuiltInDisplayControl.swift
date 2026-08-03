@@ -9,23 +9,23 @@ import Darwin
     static func setDisabled(_ disabled: Bool) -> String? {
         guard disabled != isDisabled else { return nil }
         guard let configureEnabled = loadConfigureEnabled() else {
-            return "Built-in display control is unavailable on this macOS version."
+            return L10n.DisplayError.controlUnavailable
         }
 
         if disabled {
-            guard let builtIn = onlineBuiltInDisplay() else { return "Could not find the built-in display." }
+            guard let builtIn = onlineBuiltInDisplay() else { return L10n.DisplayError.builtinNotFound }
             displayID = builtIn
         }
-        guard let displayID else { return disabled ? "Could not find the built-in display." : nil }
+        guard let displayID else { return disabled ? L10n.DisplayError.builtinNotFound : nil }
 
         var configuration: CGDisplayConfigRef?
         guard CGBeginDisplayConfiguration(&configuration) == .success, let configuration else {
-            return "Could not begin display configuration."
+            return L10n.DisplayError.configBeginFailed
         }
         guard configureEnabled(configuration, displayID, !disabled) == .success,
               CGCompleteDisplayConfiguration(configuration, .forSession) == .success else {
             CGCancelDisplayConfiguration(configuration)
-            return disabled ? "Could not disable the built-in display." : "Could not enable the built-in display."
+            return disabled ? L10n.DisplayError.disableFailed : L10n.DisplayError.enableFailed
         }
 
         isDisabled = disabled
